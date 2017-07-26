@@ -189,3 +189,8 @@ xt:
     asc_url: https://github.com/bitcoinxt/bitcoinxt/releases/download/v0.11F/SHA256SUMS.asc
     key: 8F6EDE3A88F86BC6F98255D7F5D993791A778012
     sha256: fc51558f73f2153866fc47d1ab7eebccd5c188e605f078155f2ff80290939184
+
+ensocoin:
+  1.0.2:
+    url: http://ensocoin.org/downloads/ensocoin-1.0.2-linux64.tar.gz
+    sha256: 7b929442a56a617552cb94e2dcb37dcc7b40547c79b8d8d6976922bfc1bbc208

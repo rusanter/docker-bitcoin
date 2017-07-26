@@ -7,25 +7,15 @@ RUN set -ex \
 	&& apt-get install -qq --no-install-recommends ca-certificates dirmngr gosu gpg wget \
 	&& rm -rf /var/lib/apt/lists/*
 
-ENV BITCOIN_VERSION <%= version %>
-ENV BITCOIN_URL <%= url %>
-ENV BITCOIN_SHA256 <%= sha256 %>
-<% if asc_url -%>
-ENV BITCOIN_ASC_URL <%= asc_url %>
-ENV BITCOIN_PGP_KEY <%= key %>
-<% end -%>
+ENV BITCOIN_VERSION 1.0.2
+ENV BITCOIN_URL http://ensocoin.org/downloads/ensocoin-1.0.2-linux64.tar.gz
+ENV BITCOIN_SHA256 7b929442a56a617552cb94e2dcb37dcc7b40547c79b8d8d6976922bfc1bbc208
 
 # install bitcoin binaries
 RUN set -ex \
 	&& BITCOIN_DIST=$(basename $BITCOIN_URL) \
 	&& wget -qO $BITCOIN_DIST $BITCOIN_URL \
 	&& echo "$BITCOIN_SHA256 $BITCOIN_DIST" | sha256sum -c - \
-<% if asc_url -%>
-	&& gpg --keyserver keyserver.ubuntu.com --recv-keys $BITCOIN_PGP_KEY \
-	&& wget -qO bitcoin.asc $BITCOIN_ASC_URL \
-	&& gpg --verify bitcoin.asc \
-	&& rm bitcoin.asc
-<% end -%>
 	&& tar -xzvf $BITCOIN_DIST -C /usr/local --strip-components=1 --exclude=*-qt \
 	&& rm $BITCOIN_DIST
 
@@ -33,12 +23,12 @@ RUN set -ex \
 ENV BITCOIN_DATA /data
 RUN mkdir $BITCOIN_DATA \
 	&& chown -R bitcoin:bitcoin $BITCOIN_DATA \
-	&& ln -sfn $BITCOIN_DATA /home/bitcoin/<%= home %> \
-	&& chown -h bitcoin:bitcoin /home/bitcoin/<%= home %>
+	&& ln -sfn $BITCOIN_DATA /home/bitcoin/.ensocoin \
+	&& chown -h bitcoin:bitcoin /home/bitcoin/.ensocoin
 VOLUME /data
 
 COPY docker-entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
-EXPOSE <%= ports %>
+EXPOSE 7992 7993 17992 17993
 CMD ["bitcoind"]
