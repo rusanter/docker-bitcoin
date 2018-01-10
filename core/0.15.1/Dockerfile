@@ -21,8 +21,9 @@ RUN set -ex \
 	&& gpg --keyserver keyserver.ubuntu.com --recv-keys $BITCOIN_PGP_KEY \
 	&& wget -qO bitcoin.asc $BITCOIN_ASC_URL \
 	&& gpg --verify bitcoin.asc \
+	&& rm bitcoin.asc \
 	&& tar -xzvf $BITCOIN_DIST -C /usr/local --strip-components=1 --exclude=*-qt \
-	&& rm bitcoin*
+	&& rm $BITCOIN_DIST
 
 # create data directory
 ENV BITCOIN_DATA /data
