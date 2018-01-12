@@ -34,6 +34,15 @@ def update_version(branch, version, opts={})
     run "sed -i 's/test_bitcoin/test_ensocoin/' #{dir}/docker-entrypoint.sh"
     run "sed -i 's/bitcoind/ensocoind/' #{dir}/docker-entrypoint.sh"
     run "sed -i 's/\\\.bitcoin/.ensocoin/' #{dir}/docker-entrypoint.sh"
+  elsif branch == "thebestcoin"
+    run "sed -i 's/^\\(\\s*\\)printtoconsole=1/\\1addnode=5.230.11.232\\\n\\1addnode=5.230.11.233\\\n\\1printtoconsole=1/' #{dir}/docker-entrypoint.sh"
+
+    run "sed -i 's/bitcoin.conf/thebestcoin.conf/' #{dir}/docker-entrypoint.sh"
+    run "sed -i 's/bitcoin-cli/thebestcoin-cli/' #{dir}/docker-entrypoint.sh"
+    run "sed -i 's/bitcoin-tx/thebestcoin-tx/' #{dir}/docker-entrypoint.sh"
+    run "sed -i 's/test_bitcoin/test_thebestcoin/' #{dir}/docker-entrypoint.sh"
+    run "sed -i 's/bitcoind/thebestcoind/' #{dir}/docker-entrypoint.sh"
+    run "sed -i 's/\\\.bitcoin/.thebestcoin/' #{dir}/docker-entrypoint.sh"
   end
 
   # render Dockerfile
@@ -44,6 +53,10 @@ def update_version(branch, version, opts={})
   if branch == "ensocoin"
     opts[:home] = '.ensocoin'
     opts[:ports] = '7992 7993 17992 17993'
+  elsif branch == "thebestcoin"
+    opts[:home] = '.thebestcoin'
+    opts[:ports] = '8801 8802 18801 18802'
+    opts[:auth] = true
   end
 
   dockerfile = ERB.new(File.read("Dockerfile.erb"), nil, "-")
