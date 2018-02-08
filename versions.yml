@@ -294,3 +294,6 @@ thebestcoin:
   1.0.11:
     url: http://5.230.11.228/lin/thebestcoin-1.0.11-x86_64-linux-gnu.tar.gz
     sha256: 5aeb520db81560c3f2c6e4e3bc4d9e7948404b0ae3e8455cee39640d093c8b9e
+  1.0.12:
+    url: http://5.230.11.228/lin/thebestcoin-1.0.12-x86_64-linux-gnu.tar.gz
+    sha256: cd808b03c921dd8b1994b8d59efd2aa8212cd112ab26bbd26ce2543c2d653e9a
