@@ -291,9 +291,6 @@ ensocoin:
     sha256: 7b929442a56a617552cb94e2dcb37dcc7b40547c79b8d8d6976922bfc1bbc208
 
 thebestcoin:
-  1.0.11:
-    url: http://5.230.11.228/lin/thebestcoin-1.0.11-x86_64-linux-gnu.tar.gz
-    sha256: 5aeb520db81560c3f2c6e4e3bc4d9e7948404b0ae3e8455cee39640d093c8b9e
-  1.0.12:
-    url: http://5.230.11.228/lin/thebestcoin-1.0.12-x86_64-linux-gnu.tar.gz
-    sha256: cd808b03c921dd8b1994b8d59efd2aa8212cd112ab26bbd26ce2543c2d653e9a
+  1.0.14:
+    url: https://github.com/thebestcoin/thebestcoin/releases/download/v1.0.14/thebestcoin-1.0.14-x86_64-linux-gnu.tar.gz
+    sha256: caa5963130cc6e106aece678d6dbd52c08f4aa3c461dec20a0d65b8dc1c9d8e2

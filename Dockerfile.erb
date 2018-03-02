@@ -1,8 +1,4 @@
 FROM debian:stretch-slim
-<% if auth -%>
-ARG AUTH_USER
-ARG AUTH_PASSWORD
-<% end -%>
 
 RUN groupadd -r bitcoin && useradd -r -m -g bitcoin bitcoin
 
@@ -22,11 +18,7 @@ ENV BITCOIN_PGP_KEY <%= key %>
 # install bitcoin binaries
 RUN set -ex \
 	&& BITCOIN_DIST=$(basename $BITCOIN_URL) \
-<% if auth -%>
-	&& wget --user "$AUTH_USER" --password "$AUTH_PASSWORD" -qO $BITCOIN_DIST $BITCOIN_URL \
-<% else -%>
 	&& wget -qO $BITCOIN_DIST $BITCOIN_URL \
-<% end -%>
 	&& echo "$BITCOIN_SHA256 $BITCOIN_DIST" | sha256sum -c - \
 <% if asc_url -%>
 	&& gpg --keyserver keyserver.ubuntu.com --recv-keys $BITCOIN_PGP_KEY \

@@ -56,7 +56,6 @@ def update_version(branch, version, opts={})
   elsif branch == "thebestcoin"
     opts[:home] = '.thebestcoin'
     opts[:ports] = '8801 8802 18801 18802'
-    opts[:auth] = true
   end
 
   dockerfile = ERB.new(File.read("Dockerfile.erb"), nil, "-")
